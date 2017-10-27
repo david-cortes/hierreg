@@ -1,8 +1,8 @@
 # hierreg
 
-This is a Python package intended for fitting linear models whose coefficients can have some deviation according to groups to which observations belong, in a similar way as random effects and hierarchical bayes models, but following more of a ‘statistical leaning’ procedure for the estimation, by applying regularization to the random effects (group deviations).
+This is a Python package intended for fitting linear models whose coefficients can have some deviation according to groups to which observations belong, in a similar way as multilevel / random effects and hierarchical bayes models, but following more of a ‘statistical leaning’ procedure for the estimation, by applying regularization to group deviations (random effects).
 
-An example such application would be to estimate a model to predict some variable of interest based on predictors/covariates collected at different physical locations (e.g. students from different schools, sales form different stores, etc.), or survey answers from different people, when data from these different groups (people/schools/regions/etc.) doesn’t behave the same and it’s desired to have different coefficients for each, but with these coefficients still being close to each other.
+An example such application would be to predict some variable of interest based on predictors/covariates collected at different physical locations (e.g. students from different schools, sales form different stores, etc.), or survey answers from different people, when data from these different groups (people/schools/regions/etc.) doesn’t behave the same and it’s desired to have different coefficients for each, but with these coefficients still being close to each other.
 
 Under the package’s default settings, the loss to minimize is as follows:
 
@@ -11,7 +11,6 @@ L(w, v) = norm( y - X*(w + sum_groups(v_group*I[x in group]) )/sqrt(nobs) + reg_
 ```
 
 Where:
-
 	* 'X' is the predictors/covariates matrix
 	* 'y' is the value to predict
 	* 'w' are the coefficients for each variable
@@ -19,7 +18,7 @@ Where:
 	* ‘group_weights' are weights for the deviation for each group, summing up to 1, and inversely proportional to the number of observations coming from each group
 	* 'I[x in group]' is an indicator column-matrix with ones when a row of X belongs to a given group
 	
-While this doesn’t provide the same inference power or statistical testing capabilities as hierarchical bayes or random random effects models, respectively, it can sometimes result in models that are able to make better predictions than either of them (see references at the bottom).
+While this doesn’t provide the same inference power or statistical testing capabilities as hierarchical bayes or random effects models, respectively, it can sometimes result in models that are able to make better predictions than either of them (see references at the bottom).
 
 ## Installation
 Package is available on PyPI, can be installed with
